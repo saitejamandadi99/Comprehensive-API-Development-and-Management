@@ -22,6 +22,8 @@ mongoose.connect(MONGO_URL)
 app.get('/', (req , res)=>{
     res.send('Application is running in the backend.')
 })
+app.use('/api/auth', require('./routes/authRoutes'));  
+
 
 app.use((err,req, res, next)=>{
     console.error(err.message);
