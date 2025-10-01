@@ -7,6 +7,16 @@ dotenv.config();
 const app = express(); 
 app.use(express.json())
 const PORT = process.env.PORT || 5000; 
+const MONGO_URL = process.env.MONGO_URL;
+
+//database connection 
+mongoose.connect(MONGO_URL)
+.then(()=>{
+    console.log('Connected to MongoDB');
+})
+.catch((err)=>{
+    console.error('Error connecting to MongoDB:', err.message);
+})
 
 
 app.get('/', (req , res)=>{
