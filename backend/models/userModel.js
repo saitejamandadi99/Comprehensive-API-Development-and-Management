@@ -13,7 +13,7 @@ const userSchema = new Schema({
         trim: true,
         match: [/^\S+@\S+\.\S+$/, "Please enter a valid email address"]
     },
-    phone:{
+    phone_no:{
         type:String, 
         required:true,
         unique:true,
