@@ -1,13 +1,22 @@
 const User = require('../models/userModel');
 
+const redisClient = require('../redisClient');
 //get all users 
 
 const getAllUsers = async (req , res) =>{
     try {
+        const cachedUsers = await redisClient.get('allUsers');
+        if (cachedUsers) {
+            return res.status(200).json({
+                message: 'Users fetched from cache',
+                users: JSON.parse(cachedUsers)
+            });
+        }
         const users = await User.find().select('-password') // excludes password 
         if(users.length ===0){
             return res.status(200).json({message: 'No users found '})
         }
+        await redisClient.set('allUsers', JSON.stringify(users), { EX: 60 * 5 }); // cache 5 mins
         return res.status(200).json({message:'Users fetched successfully' , users})
         
     } catch (error) {
