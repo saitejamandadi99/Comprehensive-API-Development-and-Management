@@ -1,0 +1,149 @@
+create-user api 
+
+POST http://localhost:5000/api/auth/register
+
+{
+  "name": "Arjun Reddy",
+  "email": "arjun.reddy@example.com",
+  "phone_no": "9123345567",
+  "password": "Arjun@2025"
+}
+
+response :
+{
+    "message": "User registered successfully",
+    "userId": "68dd2f634c09004b23985b2d"
+}
+
+
+Login-user api 
+
+POST http://localhost:5000/api/auth/login
+
+
+{
+  "email": "arjun.reddy@example.com",
+  "password": "Arjun@2025"
+}
+
+response : 
+{
+    "message": "Login Successfully Completed",
+    "userId": "68dd2f634c09004b23985b2d",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGRkMmY2MzRjMDkwMDRiMjM5ODViMmQiLCJpYXQiOjE3NTkzMjYxMzIsImV4cCI6MTc1OTMyOTczMn0.sYeZSetzVmTKhLe1II8tx8EHMXxAN66v-w2Z70rt3eQ"
+}
+
+
+
+get all users 
+
+http://localhost:5000/api/users
+
+
+response 
+
+{
+    "message": "Users fetched successfully",
+    "users": [
+        {
+            "_id": "68dd2f2b4c09004b23985b23",
+            "name": "Anjali Verma",
+            "email": "anjali.verma@example.com",
+            "phone_no": "9123456789",
+            "createdAt": "2025-10-01T13:39:55.448Z",
+            "updatedAt": "2025-10-01T13:39:55.448Z",
+            "__v": 0
+        },
+        {
+            "_id": "68dd2f554c09004b23985b26",
+            "name": "Vikram Singh",
+            "email": "vikram.singh@example.com",
+            "phone_no": "9988776655",
+            "createdAt": "2025-10-01T13:40:37.750Z",
+            "updatedAt": "2025-10-01T13:40:37.750Z",
+            "__v": 0
+        },
+        {
+            "_id": "68dd2f5d4c09004b23985b2a",
+            "name": "Priya Sharma",
+            "email": "priya.sharma@example.com",
+            "phone_no": "9876654321",
+            "createdAt": "2025-10-01T13:40:45.468Z",
+            "updatedAt": "2025-10-01T13:40:45.468Z",
+            "__v": 0
+        },
+        {
+            "_id": "68dd2f634c09004b23985b2d",
+            "name": "Arjun Reddy",
+            "email": "arjun.reddy@example.com",
+            "phone_no": "9123345567",
+            "createdAt": "2025-10-01T13:40:51.151Z",
+            "updatedAt": "2025-10-01T13:40:51.151Z",
+            "__v": 0
+        }
+    ]
+}
+
+
+get User by Id 
+
+get http://localhost:5000/api/users/68dd2f634c09004b23985b2d
+
+response : 
+
+{"message":"User fetched","user":{"_id":"68dd2f634c09004b23985b2d","name":"Arjun Reddy","email":"arjun.reddy@example.com","phone_no":"9123345567","createdAt":"2025-10-01T13:40:51.151Z","updatedAt":"2025-10-01T13:40:51.151Z","__v":0}}
+
+
+Update user by id 
+
+put http://localhost:5000/api/users/68dd2f634c09004b23985b2d
+
+{
+  "name": "Arjun Reddy Updated",
+  "email": "arjun.reddy.updated@example.com",
+  "phone_no": "9123345568"
+}
+
+
+response :  
+
+{
+    "message": "User updated successfully",
+    "user": {
+        "_id": "68dd2f634c09004b23985b2d",
+        "name": "Arjun Reddy Updated",
+        "email": "arjun.reddy.updated@example.com",
+        "phone_no": "9123345568",
+        "createdAt": "2025-10-01T13:40:51.151Z",
+        "updatedAt": "2025-10-01T15:02:22.525Z",
+        "__v": 0
+    }
+}
+
+
+delete user by id
+
+delete http://localhost:5000/api/users/68dd2f634c09004b23985b2d
+
+response 
+
+{
+    "message": "User deleted successfully",
+    "user": {
+        "_id": "68dd2f634c09004b23985b2d",
+        "name": "Arjun Reddy Updated",
+        "email": "arjun.reddy.updated@example.com",
+        "phone_no": "9123345568",
+        "createdAt": "2025-10-01T13:40:51.151Z",
+        "updatedAt": "2025-10-01T15:02:22.525Z",
+        "__v": 0
+    }
+}
+
+
+get http://localhost:5000/api/users/68dd2f634c09004b23985b2d
+
+{
+    "message": "User not found"
+}
+
