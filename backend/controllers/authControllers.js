@@ -7,8 +7,13 @@ const registerUser = async (req , res)=>{
         const existingUser = await User.findOne({
             $or: [{email}, {phone_no}]
         }); 
-        if (existingUser){
-            return res.status(400).json({message: 'User already exists with this email/phone_no.'})
+        if(existingUser){
+            if (existingUser.email ===email){
+                return res.status(400).json({message: 'User already exists with this email.'})
+            }
+            if (existingUser.phone_no ===phone_no){
+                return res.status(400).json({message: 'User already exists with this phone number.'})
+            }
         }
         const hashedPassword = await bcrypt.hash(password, 10); 
         const newUser = new User({
