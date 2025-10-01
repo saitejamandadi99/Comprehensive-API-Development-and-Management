@@ -6,7 +6,7 @@ const getAllUsers = async (req , res) =>{
     try {
         const users = await User.find().select('-password') // excludes password 
         if(users.length ===0){
-            return res.status(404).json({message: 'No users found '})
+            return res.status(200).json({message: 'No users found '})
         }
         return res.status(200).json({message:'Users fetched successfully' , users})
         
@@ -41,6 +41,11 @@ const updateUserById = async (req, res)=>{
     try {
         const id = req.params.id; 
         const {name, email,phone_no} = req.body;
+        const existingUser = await User.findOne({
+            $or: [{ email }, { phone_no }],
+                _id: { $ne: id }
+        });
+        if (existingUser) return res.status(400).json({ message: 'Email or phone already in use.' });
         const user = await User.findByIdAndUpdate(id, {name, email, phone_no}, {new:true}).select('-password');
         if(!user){
             return res.status(404).json({message: 'User not found'})
